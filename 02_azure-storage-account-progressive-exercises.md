@@ -1,11 +1,9 @@
 # Azure Storage Account Hands-on Exercises
 
-## Student-Facing Progressive Lab Guide
+## Lab Guide
 
 **Module:** Azure Storage Account  
 **Audience:** Beginners, data engineering learners, cloud beginners  
-**Delivery Mode:** Azure Portal hands-on  
-**Recommended Duration:** 1 full day or 2 shorter sessions  
 **Focus Areas:** Storage account creation, Blob Storage, containers, folders, uploads, SAS, access tiers, soft delete, versioning, lifecycle management, ADLS Gen2, Azure Files, Queue Storage, Table Storage, monitoring, cost review, and cleanup.
 
 ---
@@ -73,7 +71,7 @@ By the end of this lab guide, you should be able to:
 
 ---
 
-# Beginner Explanation
+# Explanation
 
 ## What Is an Azure Storage Account?
 
