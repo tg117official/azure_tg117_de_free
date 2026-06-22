@@ -2035,6 +2035,181 @@ Explain why access keys are sensitive.
 
 You learned why account keys must be handled carefully.
 
+# Azure CLI + Access Key: List and Download Blob
+
+This short guide covers:
+
+1. Azure CLI installation
+2. Listing and downloading blobs using Azure CLI + access key
+3. Listing and downloading blobs using Python + access key
+
+> Do not share access keys publicly. Do not commit them to GitHub.
+
+---
+
+## 1. Install Azure CLI on Windows
+
+Open PowerShell and run:
+
+```powershell
+winget install Microsoft.AzureCLI
+```
+
+Close and reopen PowerShell.
+
+Verify installation:
+
+```powershell
+az --version
+```
+
+---
+
+## 2. Azure CLI: List and Download Blob Using Access Key
+
+In this approach, `az login` is not required because we are using the storage account access key directly.
+
+### Set Variables
+
+Replace the values with your actual storage account details.
+
+```powershell
+$STORAGE_ACCOUNT = "tgdemostorage"
+$CONTAINER = "data"
+$BLOB_NAME = "customers.csv"
+$STORAGE_KEY = "paste_your_access_key_here"
+```
+
+### List Files in the Container
+
+```powershell
+az storage blob list `
+  --account-name $STORAGE_ACCOUNT `
+  --account-key $STORAGE_KEY `
+  --container-name $CONTAINER `
+  --output table
+```
+
+### Download the Blob
+
+```powershell
+az storage blob download `
+  --account-name $STORAGE_ACCOUNT `
+  --account-key $STORAGE_KEY `
+  --container-name $CONTAINER `
+  --name $BLOB_NAME `
+  --file ".\customers.csv" `
+  --overwrite true
+```
+
+### View Downloaded File
+
+```powershell
+Get-Content ".\customers.csv"
+```
+
+---
+
+## 3. Python: List and Download Blob Using Access Key
+
+### Install Python Package
+
+```powershell
+pip install azure-storage-blob
+```
+
+### Python Program
+
+Create a file named:
+
+```text
+access_blob_using_key.py
+```
+
+Add the following code:
+
+```python
+from azure.storage.blob import BlobServiceClient
+
+# Replace these values
+storage_account_name = "tgdemostorage"
+storage_account_key = "PASTE_YOUR_ACCESS_KEY_HERE"
+
+container_name = "data"
+blob_name = "customers.csv"
+
+account_url = f"https://{storage_account_name}.blob.core.windows.net"
+
+blob_service_client = BlobServiceClient(
+    account_url=account_url,
+    credential=storage_account_key
+)
+
+container_client = blob_service_client.get_container_client(container_name)
+
+# 1. List blobs
+print("Files in container:")
+for blob in container_client.list_blobs():
+    print(blob.name)
+
+# 2. Download one blob
+blob_client = blob_service_client.get_blob_client(
+    container=container_name,
+    blob=blob_name
+)
+
+blob_data = blob_client.download_blob().readall()
+
+with open("downloaded_customers.csv", "wb") as file:
+    file.write(blob_data)
+
+print("\nDownloaded file: downloaded_customers.csv")
+
+# 3. View file content
+print("\nFile content:")
+print(blob_data.decode("utf-8"))
+```
+
+### Run the Python Program
+
+```powershell
+python access_blob_using_key.py
+```
+
+---
+
+## 4. Quick Summary
+
+| Task | Tool |
+|---|---|
+| Install Azure CLI | `winget install Microsoft.AzureCLI` |
+| List blobs using access key | `az storage blob list` |
+| Download blob using access key | `az storage blob download` |
+| List blobs using Python | `container_client.list_blobs()` |
+| Download blob using Python | `blob_client.download_blob()` |
+
+---
+
+## 5. Security Reminder
+
+Access keys are powerful credentials.
+
+Do not:
+
+- Share access keys in chat
+- Commit access keys to GitHub
+- Add access keys to screenshots
+- Hardcode access keys in production code
+
+For real projects, prefer:
+
+- Microsoft Entra ID / RBAC
+- SAS tokens with short expiry
+- Azure Key Vault for storing secrets
+
+
+
+
 ---
 
 # Exercise 21: Create an Azure File Share
