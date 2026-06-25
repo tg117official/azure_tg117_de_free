@@ -99,7 +99,7 @@ Before starting, make sure you have:
 
 ---
 
-## Open Microsoft Entra ID
+## Step 1: Open Microsoft Entra ID
 
 Go to:
 
@@ -130,7 +130,7 @@ A tenant is where users and groups exist.
 
 ---
 
-## Invite an External User as Guest User
+## Step 2: Invite an External User as Guest User
 
 Go to:
 
@@ -157,7 +157,7 @@ You are inviting one specific external user into your tenant.
 
 ---
 
-## Create User Groups
+## Step 3: Create User Groups
 
 Go to:
 
@@ -189,7 +189,7 @@ All users inside that group receive the assigned permission.
 
 ---
 
-## Create a Resource Group
+## Step 4: Create a Resource Group
 
 Go to:
 
@@ -218,7 +218,7 @@ rg-ecompro-datalake
 
 ---
 
-## Create ADLS Gen2 Storage Account
+## Step 5: Create ADLS Gen2 Storage Account
 
 Go to:
 
@@ -246,7 +246,7 @@ ADLS Gen2 is commonly used for data lake and data engineering workloads.
 
 ---
 
-## Create Container and Folder Structure
+## Step 6: Create Container and Folder Structure
 
 Create one container:
 
@@ -273,7 +273,7 @@ In ADLS Gen2, folders/directories are real because **Hierarchical Namespace** is
 
 ---
 
-## Assign RBAC Roles
+## Step 7: Assign RBAC Roles
 
 RBAC means **Role-Based Access Control**.
 
@@ -295,7 +295,7 @@ Example:
 grp-data-engineers + Storage Blob Data Contributor + data container = upload/download access
 ```
 
-### Assign Reader Role for Portal Visibility
+### 7.1 Assign Reader Role for Portal Visibility
 
 Scope:
 
@@ -316,7 +316,7 @@ Purpose:
 Reader role allows users to see the Azure resource in the portal.
 ```
 
-### Assign Data Engineer Access
+### 7.2 Assign Data Engineer Access
 
 Scope:
 
@@ -341,7 +341,7 @@ Overwrite files
 Delete files
 ```
 
-### Assign Auditor Access
+### 7.3 Assign Auditor Access
 
 Scope:
 
@@ -373,7 +373,7 @@ Delete files
 
 ---
 
-## Test Data Engineer Access
+## Step 8: Test Data Engineer Access
 
 Login using the data engineer test account.
 
@@ -404,7 +404,7 @@ The group has Storage Blob Data Contributor access.
 
 ---
 
-## Test Auditor Access
+## Step 9: Test Auditor Access
 
 Login using the auditor test account.
 
@@ -435,7 +435,7 @@ The group has Storage Blob Data Reader access only.
 
 ---
 
-## Understand Azure Policy
+## Step 10: Understand Azure Policy
 
 Azure Policy is different from RBAC.
 
@@ -471,7 +471,7 @@ So even if a user has permission, Azure Policy can still restrict what is allowe
 
 ---
 
-## Understand Management Groups
+## Step 11: Understand Management Groups
 
 Management groups are used to organize subscriptions.
 
@@ -513,7 +513,7 @@ For small practice accounts, you may only have one subscription, so management g
 
 ---
 
-## Understand Billing Profile and Invoice Section
+## Step 12: Understand Billing Profile and Invoice Section
 
 Go to:
 
@@ -568,7 +568,7 @@ They are connected through the subscription.
 
 ---
 
-## Check Cost
+## Step 13: Check Cost
 
 Go to:
 
@@ -594,7 +594,7 @@ Subscription is linked to billing profile and invoice section.
 
 ---
 
-## Cleanup
+## Step 14: Cleanup
 
 After completing the activity:
 
