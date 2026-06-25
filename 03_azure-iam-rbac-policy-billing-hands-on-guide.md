@@ -451,15 +451,6 @@ Azure Policy answers:
 What is allowed or not allowed?
 ```
 
-Example policies:
-
-```text
-Resources can be created only in Central India.
-Storage account public access must be disabled.
-Only selected VM sizes are allowed.
-Only LRS storage is allowed for training subscriptions.
-```
-
 Example:
 
 ```text
@@ -469,6 +460,252 @@ Policy: But storage accounts can be created only in Central India.
 
 So even if a user has permission, Azure Policy can still restrict what is allowed.
 
+---
+
+### 10.1 Policy Hands-on 1: Allow Resources Only in Central India
+
+In this hands-on, you will create a policy that allows resources to be created only in a selected Azure region.
+
+Go to:
+
+```text
+Azure Portal → Policy → Assignments → Assign policy
+```
+
+Select scope:
+
+```text
+Subscription or Resource Group
+```
+
+For this activity, select:
+
+```text
+Resource Group: rg-ecompro-datalake
+```
+
+Select policy definition:
+
+```text
+Allowed locations
+```
+
+Set allowed location:
+
+```text
+Central India
+```
+
+Assignment name:
+
+```text
+Allow only Central India
+```
+
+Create the policy assignment.
+
+Now test the policy.
+
+Try to create a new storage account or any simple resource in a different region, for example:
+
+```text
+East US
+```
+
+Expected result:
+
+```text
+Azure should block the creation or mark it as non-compliant, depending on the policy effect and evaluation timing.
+```
+
+Now try creating the resource in:
+
+```text
+Central India
+```
+
+Expected result:
+
+```text
+Resource creation should be allowed.
+```
+
+Purpose of this policy:
+
+```text
+This policy helps companies control where resources are created.
+This is useful for compliance, latency, data residency, and cost governance.
+```
+
+---
+
+### 10.2 Policy Hands-on 2: Require a Tag on Resources
+
+In this hands-on, you will create a policy that requires resources to have a specific tag.
+
+Go to:
+
+```text
+Azure Portal → Policy → Assignments → Assign policy
+```
+
+Select scope:
+
+```text
+Resource Group: rg-ecompro-datalake
+```
+
+Select policy definition:
+
+```text
+Require a tag on resources
+```
+
+Tag name:
+
+```text
+Project
+```
+
+Assignment name:
+
+```text
+Require Project Tag
+```
+
+Create the policy assignment.
+
+Now test the policy.
+
+Try to create a resource without the `Project` tag.
+
+Expected result:
+
+```text
+Azure should block the resource creation or mark it as non-compliant, depending on the selected policy effect.
+```
+
+Now create the resource again with this tag:
+
+```text
+Project = EcomPro
+```
+
+Expected result:
+
+```text
+Resource creation should be allowed.
+```
+
+Purpose of this policy:
+
+```text
+This policy helps companies track cost, ownership, project usage, and accountability.
+```
+
+---
+
+### 10.3 More Examples of Azure Policies
+
+These are common Azure Policy examples used in companies:
+
+```text
+Resources can be created only in approved regions.
+Storage account public access must be disabled.
+Only selected VM sizes are allowed.
+Only LRS storage is allowed for training subscriptions.
+All resources must have tags like Project, Owner, Environment, and CostCenter.
+Public IP creation should be restricted.
+Diagnostic logs must be enabled for important services.
+Only approved resource types can be created.
+```
+
+---
+
+### 10.4 RBAC vs Azure Policy
+
+| Concept | Purpose |
+|---|---|
+| RBAC | Controls who can perform actions |
+| Azure Policy | Controls what is allowed or denied |
+| RBAC Scope | Management group, subscription, resource group, resource |
+| Policy Scope | Management group, subscription, resource group |
+
+Example:
+
+```text
+User has Contributor role on the resource group.
+```
+
+This means:
+
+```text
+The user can create and manage resources.
+```
+
+But if Azure Policy says:
+
+```text
+Only Central India location is allowed.
+```
+
+Then the user cannot create resources in:
+
+```text
+East US
+West Europe
+Southeast Asia
+```
+
+Final result:
+
+```text
+RBAC allowed the user to create resources.
+Azure Policy restricted where the resources can be created.
+```
+
+---
+
+### 10.5 Important Notes
+
+```text
+RBAC gives permission.
+Policy enforces rules.
+
+RBAC is about access.
+Policy is about governance.
+
+RBAC decides whether the user is allowed to perform an action.
+Policy decides whether that action follows company rules.
+
+Both RBAC and Policy can be applied at higher scopes like management group or subscription.
+
+Policies assigned at higher scopes can affect lower scopes.
+For example, a policy assigned at subscription level can affect resource groups and resources inside that subscription.
+```
+
+---
+
+### 10.6 Simple Summary
+
+```text
+RBAC = Who can do what?
+Policy = What is allowed or denied?
+```
+
+Example:
+
+```text
+RBAC: Data engineer can create storage accounts.
+Policy: Storage accounts must be created only in Central India.
+```
+
+Final understanding:
+
+```text
+A user may have permission through RBAC,
+but Azure Policy can still block the action if it violates company rules.
+```
 ---
 
 ## Step 11: Understand Management Groups
